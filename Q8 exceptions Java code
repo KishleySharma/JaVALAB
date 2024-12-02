@@ -1,0 +1,60 @@
+class DisplayBMS extends Thread {
+    public void run() {
+        try {
+            while (true) {
+                System.out.println("BMS College of Engineering");
+                Thread.sleep(10000); // Sleep for 10 seconds
+            }
+        } catch (InterruptedException e) {
+            System.out.println("Thread interrupted: " + e.getMessage());
+        }
+    }
+}
+
+class DisplayCSE extends Thread {
+    public void run() {
+        try {
+            while (true) {
+                System.out.println("CSE");
+                Thread.sleep(1000); // Sleep for 1 second
+            }
+        } catch (InterruptedException e) {
+            System.out.println("Thread interrupted: " + e.getMessage());
+        }
+    }
+}
+
+public class MultiThreadExample {
+    public static void main(String[] args) {
+        // Creating instances of the threads
+        DisplayBMS thread1 = new DisplayBMS();
+        DisplayCSE thread2 = new DisplayCSE();
+
+        // Starting the threads
+        thread1.start();
+        thread2.start();
+
+        // Adding a way to stop the threads after some time (e.g., 20 seconds)
+        try {
+            Thread.sleep(20000); // Let the threads run for 20 seconds
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Interrupt both threads to stop them gracefully
+        thread1.interrupt();
+        thread2.interrupt();
+
+        try {
+            // Wait for both threads to finish
+            thread1.join();
+            thread2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Print the final details after threads have finished
+        System.out.println("Name: Kishley Sharma");
+        System.out.println("USN: 1BM23CS153");
+    }
+}
